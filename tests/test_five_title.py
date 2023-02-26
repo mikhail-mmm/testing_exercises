@@ -9,9 +9,9 @@ from pytest_lazyfixture import lazy_fixture
     'title,expected',
     [
         (lazy_fixture('long_title'), lazy_fixture('long_title')),
-        ("A-ha: Take on me", "Copy of A-ha: Take on me"),
-        ("Copy of A-ha: Take on me", "Copy of A-ha: Take on me (2)"),
-        ("Copy of A-ha: Take on me (2)", "Copy of A-ha: Take on me (3)"),
+        ("Test", "Copy of Test"),
+        ("Copy of Test", "Copy of Test (2)"),
+        ("Copy of Test (2)", "Copy of Test (3)"),
     ]
 )
 def test_change_copy_item(title, expected):

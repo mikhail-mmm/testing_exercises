@@ -2,30 +2,49 @@ import datetime
 import decimal
 import pytest
 
+from faker import Faker
 from functions.four_bank_parser import BankCard, SmsMessage, Expense
 
 
 @pytest.fixture
-def expected_today():
+def hours():
+    faker = Faker()
+    fake_hour = faker.time(pattern='%H')
+    return fake_hour
+
+@pytest.fixture
+def minutes():
+    faker = Faker()
+    fake_minutes = faker.time(pattern='%M')
+    return fake_minutes
+
+
+@pytest.fixture
+def time_str(hours, minutes):
+    return f'{hours}:{minutes}'
+
+
+@pytest.fixture
+def datetime_today(time_str):
     date = datetime.datetime.today()
     return datetime.datetime(
         date.year,
         date.month,
         date.day,
-        10,
-        25,
+        int(time_str[:2]),
+        int(time_str[3:]),
     )
 
 
 @pytest.fixture
-def expected_tomorrow():
+def datetime_tomorrow(time_str):
     date = datetime.datetime.today() + datetime.timedelta(days=1)
     return datetime.datetime(
         date.year,
         date.month,
         date.day,
-        10,
-        25,
+        int(time_str[:2]),
+        int(time_str[3:]),
     )
 
 
@@ -58,16 +77,8 @@ def expense(cards):
 
 @pytest.fixture
 def long_title():
-    return """We're talking away I don't know what I'm to say I'll say it anyway 
-Today's another day to find you Shying away I'll be coming for your love, okay? 
-Take on me (Take on me) Take me on (Take on me) I'll be gone In a day or two 
-So needless to say I'm odds and ends But I'll be stumbling away 
-Slowly learning that life is okay Say after me 
-It's no better to be safe than sorry 
-Take on me (Take on me) Take me on (Take on me) 
-I'll be gone In a day or two Oh, things that you say 
-Is it a life or just to play my worries away? You're all the things 
-I've got to remember You're shying away I'll be coming for you anyway 
-Take on me (Take on me) Take me on (Take on me) I'll be gone In a day 
-Take on me (Take on me) Take me on (Take on me) I'll be gone In a day
-"""
+    fake = Faker(locale="en_US")
+    fake_long_title = ''
+    for _ in range(0, 2):
+        fake_long_title += fake.text()
+    return fake_long_title
