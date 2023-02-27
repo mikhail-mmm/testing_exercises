@@ -4,19 +4,16 @@ import pytest
 
 from faker import Faker
 from functions.four_bank_parser import BankCard, SmsMessage, Expense
+from random import randint
 
 
 @pytest.fixture
 def hours():
-    faker = Faker()
-    fake_hour = faker.time(pattern='%H')
-    return fake_hour
+    return randint(0, 23)
 
 @pytest.fixture
 def minutes():
-    faker = Faker()
-    fake_minutes = faker.time(pattern='%M')
-    return fake_minutes
+    return randint(0, 59)
 
 
 @pytest.fixture
@@ -25,14 +22,14 @@ def time_str(hours, minutes):
 
 
 @pytest.fixture
-def datetime_today(time_str):
+def datetime_today(hours, minutes):
     date = datetime.datetime.today()
     return datetime.datetime(
         date.year,
         date.month,
         date.day,
-        int(time_str[:2]),
-        int(time_str[3:]),
+        hours,
+        minutes,
     )
 
 
