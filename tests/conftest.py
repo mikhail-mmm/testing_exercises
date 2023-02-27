@@ -34,14 +34,14 @@ def datetime_today(hours, minutes):
 
 
 @pytest.fixture
-def datetime_tomorrow(time_str):
+def datetime_tomorrow(hours, minutes):
     date = datetime.datetime.today() + datetime.timedelta(days=1)
     return datetime.datetime(
         date.year,
         date.month,
         date.day,
-        int(time_str[:2]),
-        int(time_str[3:]),
+        hours,
+        minutes,
     )
 
 
