@@ -4,45 +4,6 @@ import pytest
 
 from faker import Faker
 from functions.four_bank_parser import BankCard, SmsMessage, Expense
-from random import randint
-
-
-@pytest.fixture
-def hours():
-    return randint(0, 23)
-
-@pytest.fixture
-def minutes():
-    return randint(0, 59)
-
-
-@pytest.fixture
-def time_str(hours, minutes):
-    return f'{hours}:{minutes}'
-
-
-@pytest.fixture
-def datetime_today(hours, minutes):
-    date = datetime.datetime.today()
-    return datetime.datetime(
-        date.year,
-        date.month,
-        date.day,
-        hours,
-        minutes,
-    )
-
-
-@pytest.fixture
-def datetime_tomorrow(hours, minutes):
-    date = datetime.datetime.today() + datetime.timedelta(days=1)
-    return datetime.datetime(
-        date.year,
-        date.month,
-        date.day,
-        hours,
-        minutes,
-    )
 
 
 @pytest.fixture

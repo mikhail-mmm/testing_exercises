@@ -1,18 +1,15 @@
-import datetime
+from datetime import datetime
 import pytest
 
-from conftest import datetime_today, datetime_tomorrow, time_str
 from functions.two_date_parser import compose_datetime_from
-from pytest_lazyfixture import lazy_fixture
 
 
 @pytest.mark.parametrize(
     'date,time,expected',
     [
-        ('tomorrow', lazy_fixture('time_str'), lazy_fixture('datetime_tomorrow')),
-        ('today', lazy_fixture('time_str'), lazy_fixture('datetime_today')),
-        ('21.02.20', lazy_fixture('time_str'), lazy_fixture('datetime_today')),
-        (str(datetime.datetime.today), lazy_fixture('time_str'), lazy_fixture('datetime_today'))
+        ('tomorrow', '10:30', datetime(2023, 3, 1, 10, 30)),
+        ('today', '10:30', datetime(2023, 2, 28, 10, 30)),
+        ('21.02.20', '10:30', datetime(2023, 2, 28, 10, 30)),
     ]
 )
 def test_compose_datetime_from(date, time, expected):
