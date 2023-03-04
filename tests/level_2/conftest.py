@@ -28,7 +28,7 @@ def student(students_with_telegram_account):
 
 
 @pytest.fixture
-def students_without_telegram_account(students_with_telegram_account):
+def students_without_telegram_account():
     students = []
     students.append(
         Student(
