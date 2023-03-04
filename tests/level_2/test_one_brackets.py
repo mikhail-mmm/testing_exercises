@@ -4,9 +4,9 @@ import pytest
 @pytest.mark.parametrize(
     'name,name_without_brackets',
     [
-    ('{{test_name}}', 'test_name'),
-    ('test_name', 'test_name'),
-    ('{test_name', 'est_na'),
+        ('{{test_name}}', 'test_name'),
+        ('test_name', 'test_name'),
+        ('{test_name', 'est_na'),
     ]
 )
 def test_delete_remove_brackets_quotes(name, name_without_brackets):
